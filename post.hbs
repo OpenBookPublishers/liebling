@@ -36,6 +36,11 @@ into the {body} of the default.hbs template --}}
                 {{/if}}
                 <span class="m-heading__meta__time">{{date published_at}}</span>
               </div>
+              {{#if canonical_url}}
+              <div class="m-heading__meta" style="margin-top: 0.5em">
+                <a href="{{canonical_url}}" class="m-heading__meta__tag">{{canonical_url}}</a>
+              </div>
+              {{/if}}
             </header>
             <div class="pos-relative js-post-content">
               <div class="m-share">
