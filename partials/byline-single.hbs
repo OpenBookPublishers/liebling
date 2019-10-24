@@ -1,0 +1,56 @@
+{{!-- Everything inside the #author tags pulls data from the author --}}
+{{#primary_author}}
+
+        <section class="m-author">
+          <div class="m-author__content">
+            <div class="m-author__picture">
+              <a href="{{url}}" class="m-author-picture" aria-label="Author picture">
+                {{#if profile_image}}
+                <div style="background-image: url({{profile_image}});"></div>
+                {{else}}
+                <div style="background-image: url({{asset "images/default-avatar-square-small.jpg"}});"></div>
+                {{/if}}
+              </a>
+            </div>
+            <div class="m-author__info">
+              <h4 class="m-author__name">
+                <a href="{{url}}">{{name}}</a>
+              </h4>
+              {{#if bio}}
+              <p class="m-author__bio">{{bio}}</p>
+              {{/if}}
+              <ul class="m-author-links">
+                {{#if orcid}}
+                <li>
+                  <a href="{{orcid}}" target="_blank" rel="noopener" aria-label="Website">
+                    <span class="ai ai-orcid" style="font-size: 1.2rem"></span>
+                  </a>
+                </li>
+                {{/if}}
+                {{#if website}}
+                <li>
+                  <a href="{{website}}" target="_blank" rel="noopener" aria-label="Website">
+                    <span class="icon-globe"></span>
+                  </a>
+                </li>
+                {{/if}}
+                {{#if facebook}}
+                <li>
+                  <a href="https://facebook.com/{{facebook}}" target="_blank" rel="noopener" aria-label="Facebook">
+                    <span class="icon-facebook"></span>
+                  </a>
+                </li>
+                {{/if}}
+                {{#if twitter}}
+                <li>
+                  <a href="https://twitter.com/{{twitter}}" target="_blank" rel="noopener" aria-label="Twitter">
+                    <span class="icon-twitter"></span>
+                  </a>
+                </li>
+                {{/if}}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+{{/primary_author}}
