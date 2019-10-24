@@ -37,8 +37,12 @@ into the {body} of the default.hbs template --}}
                 <span class="m-heading__meta__time">{{date published_at}}</span>
               </div>
               {{#if canonical_url}}
+              {{#contentFor "meta"}}
+                <meta name="citation_doi" content="{{canonical_url}}"/>
+                <meta name="DC.identifier" scheme="DOI" content="{{canonical_url}}"/>
+              {{/contentFor}}
               <div class="m-heading__meta" style="margin-top: 0.5em">
-                <a href="{{canonical_url}}" class="m-heading__meta__tag"><a href="{{orcid}}"><i class="ai ai-doi"></i> {{canonical_url}}</a>
+                <a href="{{canonical_url}}" class="m-heading__meta__tag"><i class="ai ai-doi"></i> {{canonical_url}}</a>
               </div>
               {{/if}}
             </header>
