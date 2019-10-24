@@ -20,6 +20,11 @@ into the {body} of the default.hbs template --}}
     <div class="m-hero-avatar" style="background-image: url({{asset "images/default-avatar-square-normal.jpg"}});"></div>
     {{/if}}
     <h1 class="m-hero-title">{{name}}</h1>
+    {{#if orcid}}
+    <p class="m-hero-description">
+        <a href="{{orcid}}"><i class="ai ai-orcid"></i> {{orcid}}</a>
+    </p>
+    {{/if}}
     {{#if bio}}
     <p class="m-hero-description">{{bio}}</p>
     {{/if}}
