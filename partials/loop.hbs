@@ -1,56 +1,68 @@
 {{!-- The template below includes the markup for each post --}}
+<div class="post-feed">
+  {{#foreach posts}}
+  <article class="post-card {{post_class}} {{#unless feature_image}}no-image{{else}}{{#is "home"}}{{#has index="nth:6"}}post-card-large{{/has}}{{/is}}{{/unless}}">
 
-{{#foreach posts}}
-  {{#is "post"}}
-    <div class="m-recommended-slider__item">
-  {{/is}}
-  {{#if feature_image}}
-    <article class="m-article-card {{post_class}}">
-      <div class="m-article-card__picture" style="background-image: url({{feature_image}});">
-  {{else}}
-    <article class="m-article-card no-picture {{post_class}}">
-      <div class="m-article-card__picture">
-  {{/if}}
-      <a href="{{url}}" class="m-article-card__picture-link" aria-label="Article"></a>
-      <a href="{{primary_author.url}}" class="m-article-card__author js-tooltip" aria-label="Authors" data-tippy-content="{{t "Posted by"}} {{primary_author.name}} {{authors autolink="false" from="2" prefix=(t "Among with") separator=" , "}}">
-        {{#if primary_author.profile_image}}
-          <div style="background-image: url({{primary_author.profile_image}});"></div>
-        {{else}}
-          <div style="background-image: url({{asset "images/default-avatar-square-small.jpg"}});"></div>
-        {{/if}}
+      {{#if feature_image}}
+      <a class="post-card-image-link" href="{{url}}">
+          {{!-- This is a responsive image, it loads different sizes depending on device
+          https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
+          <img class="post-card-image"
+              srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 600w,
+                      {{img_url feature_image size="l"}} 1000w,
+                      {{img_url feature_image size="xl"}} 2000w"
+              sizes="(max-width: 1000px) 400px, 700px"
+              src="{{img_url feature_image size="m"}}"
+              alt="{{title}}"
+          />
       </a>
-      {{#if featured}}
-        <a href="{{url}}" class="m-article-card__featured js-tooltip" data-tippy-content="{{t "Featured"}}" aria-label="Article">
-          <span class="icon-star"></span>
-        </a>
       {{/if}}
-    </div>
-    {{#if primary_tag}}
-      <div class="m-article-card__info">
-        <a href="{{primary_tag.url}}" class="m-article-card__tag">{{primary_tag.name}}</a>
-    {{else}}
-      <div class="m-article-card__info no-tag">
-    {{/if}}
-      <a href="{{url}}" class="m-article-card__info-link">
-        <div>
-          <h2 class="m-article-card__title">{{title}}</h2>
-        </div>
-        <div class="m-article-card__timestamp">
-          <span>{{date published_at timeago="true"}}</span>
-          <span>&bull;</span>
-          <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
-        </div>
-      </a>
-    </div>
+
+      <div class="post-card-content">
+
+          <a class="post-card-content-link" href="{{url}}">
+
+              <header class="post-card-header">
+                  {{#if primary_tag}}
+                      <span class="post-card-tags">{{primary_tag.name}}</span>
+                  {{/if}}
+                  <h2 class="post-card-title">{{title}}</h2>
+              </header>
+
+              <section class="post-card-excerpt">
+                  <p>{{excerpt words="33"}}</p>
+              </section>
+
+          </a>
+
+          <footer class="post-card-meta">
+
+              <ul class="author-list">
+              {{#foreach authors}}
+                  <li class="author-list-item">
+
+                      <div class="author-name-tooltip">
+                          {{name}}
+                      </div>
+
+                      {{#if profile_image}}
+                          <a href="{{url}}" class="static-avatar">
+                              <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
+                          </a>
+                      {{else}}
+                          <a href="{{url}}" class="static-avatar author-profile-image">{{> "icons/avatar"}}</a>
+                      {{/if}}
+                  </li>
+              {{/foreach}}
+              </ul>
+
+              <span class="reading-time">{{reading_time}}</span>
+
+          </footer>
+
+      </div>{{!--/.post-card-content--}}
+
   </article>
-  {{#is "post"}}
-    </div>
-  {{/is}}
-  {{else}}
-    <header class="m-heading no-margin">
-      <h3>{{t "No posts found"}}</h3>
-      <p>
-        {{t "Apparently there are no posts at the moment, check again later."}}
-      </p>
-    </header>
-{{/foreach}}
+  {{/foreach}}
+</div>
