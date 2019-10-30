@@ -46,8 +46,15 @@ into the {body} of the default.hbs template --}}
                     <span>
                       {{plural count.posts empty=(t "No posts") singular=(t "1 post") plural=(t "% posts")}}
                     </span>
-                    {{#has any="twitter, facebook, website"}}
+                    {{#has any="twitter, facebook, website, orcid"}}
                     <ul class="m-article-card__social">
+                      {{#if orcid}}
+                      <li>
+                        <a href="{{orcid}}" target="_blank" rel="noopener">
+                          <span class="ai ai-orcid"></span>
+                        </a>
+                      </li>
+                      {{/if}}
                       {{#if website}}
                       <li>
                         <a href="{{website}}" target="_blank" rel="noopener">
