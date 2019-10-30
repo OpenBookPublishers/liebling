@@ -76,7 +76,7 @@ $(document).ready(() => {
       matchAllTokens: true,
       maxPatternLength: 32,
       minMatchCharLength: 1,
-      keys: ['title', 'custom_excerpt', 'html']
+      keys: ['title', 'custom_excerpt', 'html', 'published_at']
     }
 
     api.posts.browse({
